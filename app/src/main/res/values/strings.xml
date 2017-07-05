@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">OrderFood</string>
-    <string name="Login">Log in</string>
+    <string name="login">Đăng nhập</string>
+    <string name="cancel">Thoát</string>
+    <string name="username">Nhập tài khoản</string>
+    <string name="password">Nhập mật khẩu</string>
+    <string name="restaurantName">Quán Tơ</string>
+    <string name="table">Bàn số</string>
+    <string name="foods">Thức ăn</string>
+    <string name="drinks">Thức uống</string>
+    <string name="pay">Thanh toán</string>
 </resources>
