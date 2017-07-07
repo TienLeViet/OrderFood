@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.orderfood.Foods">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/type"
+        android:textColor="#bc0909"
+        android:textSize="25dp"
+        android:background="#1abc1a" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkBox_long"
+                android:layout_width="wrap_content"
+                android:text="@string/Long" />
+
+            <CheckBox
+                android:id="@+id/checkBox_ca"
+                android:layout_width="wrap_content"
+                android:text="@string/Ca" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkBox_cha"
+                android:layout_width="wrap_content"
+                android:text="@string/Cha" />
+
+            <CheckBox
+                android:id="@+id/checkBox_khongBot"
+                android:layout_width="wrap_content"
+                android:text="@string/KhongBot" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkBox_khongMau"
+                android:layout_width="wrap_content"
+                android:text="@string/KhongMau" />
+
+            <CheckBox
+                android:id="@+id/checkBox_khongHanh"
+                android:layout_width="wrap_content"
+                android:text="@string/KhongHanh" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkBox_khongGiaVi"
+                android:layout_width="wrap_content"
+                android:text="@string/KhongGiaVi" />
+
+            <CheckBox
+                android:id="@+id/checkbox_goiVe"
+                android:layout_width="wrap_content"
+                android:text="@string/GoiVe" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup_hinhThuc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton_normalBowl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/normal"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioButton_smallBowl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/small" />
+
+        <RadioButton
+            android:id="@+id/radioButton_specialBowl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/special" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:text="@string/listWaiting"
+            android:textColor="#bc0909"
+            android:textSize="25dp"
+            android:background="#1abc1a" />
+
+        <ImageButton
+            android:id="@+id/imageButton_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/delete" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView_foodsWaiting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/next" />
+
+</LinearLayout>

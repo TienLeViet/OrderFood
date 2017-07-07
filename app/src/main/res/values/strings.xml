@@ -9,4 +9,19 @@
     <string name="foods">Thức ăn</string>
     <string name="drinks">Thức uống</string>
     <string name="pay">Thanh toán</string>
+    <string name="type">Thành phần</string>
+    <string name="listWaiting">Danh sách chờ</string>
+    <string name="Long">Lòng</string>
+    <string name="Ca">Cá</string>
+    <string name="Cha">Chả cua</string>
+    <string name="KhongBot">Không bột</string>
+    <string name="KhongMau">Không màu</string>
+    <string name="KhongHanh">Không hành</string>
+    <string name="KhongGiaVi">Không gia vị</string>
+    <string name="GoiVe">Gói về</string>
+    <string name="normal">Thường</string>
+    <string name="small">Nhỏ</string>
+    <string name="special">Đặc biệt</string>
+    <string name="add">Thêm</string>
+    <string name="next">Tiếp theo</string>
 </resources>

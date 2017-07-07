@@ -16,17 +16,14 @@ public class MainActivity extends AppCompatActivity {
     Button button_cancel;
     // Create a count variable when access acount to limit the number of false entries.
     int countNumber = 3;
-    Button button_foods;
-    Button button_drinks;
-    Button button_pay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Ánh xạ.
+        // Ánh xạ của activity_main.xml.
         addControls();
-        // Events handler.
+        // Events handler of activity_main.xml.
         addEvents();
     }
 
@@ -37,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         editText_password = (EditText) findViewById(R.id.editText_password);
         button_login      = (Button)   findViewById(R.id.button_login);
         button_cancel     = (Button)   findViewById(R.id.button_cancel);
-        button_foods      = (Button)   findViewById(R.id.button_foods);
-        button_drinks     = (Button)   findViewById(R.id.button_drinks);
-        button_pay        = (Button)   findViewById(R.id.button_pay);
     }
 
     public void addEvents() {
