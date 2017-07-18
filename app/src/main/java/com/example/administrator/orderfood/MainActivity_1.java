@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity_1 extends AppCompatActivity {
 
     EditText editText_username;
     EditText editText_password;
@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
                 if (editText_username.getText().toString().equals("admin")
                         && editText_password.getText().toString().equals("admin")) {
                     // If true then opens the activity_type_of_menu.xml interface.
-                    Intent intent = new Intent(MainActivity.this, TypeOfMenu.class);
+                    Intent intent = new Intent(MainActivity_1.this, TypeOfMenu_2.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity.this, "Tài khoản hoặc mật khẩu không đúng!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity_1.this, "Tài khoản hoặc mật khẩu không đúng!", Toast.LENGTH_LONG).show();
                     // If false then decreases the countNumber variable, and if it equals 0 then hide the button.
                     countNumber--;
                     if (countNumber == 0) {

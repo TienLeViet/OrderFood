@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.administrator.orderfood.Foods">
+    tools:context="com.example.administrator.orderfood.Foods_3">
 
     <TextView
         android:layout_width="match_parent"

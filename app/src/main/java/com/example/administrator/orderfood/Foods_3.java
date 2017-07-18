@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 
-public class Foods extends AppCompatActivity {
+public class Foods_3 extends AppCompatActivity {
 
     CheckBox checkBox_long;
     CheckBox checkBox_ca;
@@ -33,7 +33,7 @@ public class Foods extends AppCompatActivity {
     ImageButton imageButton_delete;
     ListView listView_foodsWaiting;
     Button button_next;
-
+    // Những món ăn đã order sẽ được thêm vào danh sách.
     ArrayList<BanhCanh> myBanhCanhArrayList = null;
     MyFoodAdapter myFoodAdapter = null;
     @Override
@@ -73,7 +73,7 @@ public class Foods extends AppCompatActivity {
 
     public void customListview() {
         myBanhCanhArrayList = new ArrayList<BanhCanh>();
-        myFoodAdapter = new MyFoodAdapter(Foods.this, R.layout.my_food, myBanhCanhArrayList);
+        myFoodAdapter = new MyFoodAdapter(Foods_3.this, R.layout.my_food, myBanhCanhArrayList);
         listView_foodsWaiting.setAdapter(myFoodAdapter);
     }
 
@@ -82,15 +82,16 @@ public class Foods extends AppCompatActivity {
         solve_CheckBoxs_And_RadioButtons();
         eventAddButton();
         eventDeleteButton();
+        eventNextButton();
 
     }
 
 //==================================================================================================
 
     public int solve_TypeOfMenu_Intent() {
-        // Lấy Intent từ TypeOfMenu.java.
+        // Nhận Intent từ TypeOfMenu.java.
         Intent myIntent = getIntent();
-        // Lấy bundle dựa vào MyPackage.
+        // Nhận bundle dựa vào tên.
         Bundle myBundle = myIntent.getBundleExtra("MyPackage");
         // Lấy nội dung trong bundle.
         int table = myBundle.getInt("tableNumber");
@@ -156,19 +157,29 @@ public class Foods extends AppCompatActivity {
         });
     }
 
+    public void eventNextButton() {
+        button_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
 //==================================================================================================
 
     public void displayListView() {
         BanhCanh banhCanh = new BanhCanh();
-        banhCanh.setTable(solve_TypeOfMenu_Intent());
         banhCanh.setContent(solve_CheckBoxs_And_RadioButtons());
         myBanhCanhArrayList.add(banhCanh);
         myFoodAdapter.notifyDataSetChanged();
+        // If the CheckBox is checked then setting is false.
+        editAsFirst();
     }
 
     public void deleteListView() {
         // Đi ngược danh sách, kiểm tra phần tử nào checked thì xóa đúng vị trí đó ra khỏi myBanhCanhArrayList.
-        for (int i = listView_foodsWaiting.getChildCount(); i >= 0; i--) {
+        for (int i = listView_foodsWaiting.getChildCount() - 1; i >= 0; i--) {
             // Lấy ra dòng thứ i trong ListView.
             // Dòng thứ i sẽ có 3 phần tử: ImageView, TextView, CheckBox.
             View v = listView_foodsWaiting.getChildAt(i);
@@ -177,9 +188,41 @@ public class Foods extends AppCompatActivity {
             if (checkBox_delete.isChecked()) {
                 // Xóa phần tử thứ i ra khỏi danh sách.
                 myBanhCanhArrayList.remove(i);
-                // Update giao diện.
-                myFoodAdapter.notifyDataSetChanged();
             }
+        }
+        // Update giao diện.
+        myFoodAdapter.notifyDataSetChanged();
+    }
+
+//==================================================================================================
+
+    public void editAsFirst() {
+        if (checkBox_long.isChecked()) {
+            checkBox_long.setChecked(false);
+        }
+        if (checkBox_ca.isChecked()) {
+            checkBox_ca.setChecked(false);
+        }
+        if (checkBox_cha.isChecked()) {
+            checkBox_cha.setChecked(false);
+        }
+        if (checkBox_khongBot.isChecked()) {
+            checkBox_khongBot.setChecked(false);
+        }
+        if (checkBox_khongMau.isChecked()) {
+            checkBox_khongMau.setChecked(false);
+        }
+        if (checkBox_khongHanh.isChecked()) {
+            checkBox_khongHanh.setChecked(false);
+        }
+        if (checkBox_khongGiaVi.isChecked()) {
+            checkBox_khongGiaVi.setChecked(false);
+        }
+        if (checkBox_goiVe.isChecked()) {
+            checkBox_goiVe.setChecked(false);
+        }
+        if (!radioButton_normalBowl.isChecked()) {
+            radioButton_normalBowl.setChecked(true);
         }
     }
 }

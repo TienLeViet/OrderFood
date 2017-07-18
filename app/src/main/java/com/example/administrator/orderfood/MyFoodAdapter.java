@@ -17,15 +17,17 @@ import java.util.ArrayList;
 
 public class MyFoodAdapter extends ArrayAdapter<BanhCanh> {
 
-    Activity context;
-    int myFoodLayout;
-    ArrayList<BanhCanh> arrayList = null;
+    Activity context;// Màn hình sẽ hiển thị cái giao diện my_food.xml.
+    int myFoodLayout;// Giao diện my_foods.xml.
+    ArrayList<BanhCanh> arrayList = null;// Món ăn đã được order.
+    int tableNumber;// Bàn đã order món ăn đó.
 
     public MyFoodAdapter(Activity context, int myFoodLayout, ArrayList<BanhCanh> arrayList) {
         super(context, myFoodLayout, arrayList);
         this.context = context;
         this.myFoodLayout = myFoodLayout;
         this.arrayList = arrayList;
+        //this.tableNumber = tableNumber;
     }
 
     @Override
@@ -36,9 +38,20 @@ public class MyFoodAdapter extends ArrayAdapter<BanhCanh> {
 
         ImageView imageView_tableNumber = (ImageView) convertView.findViewById(R.id.imageView_tableNumber);
         TextView textView_content = (TextView) convertView.findViewById(R.id.textView_content);
+        CheckBox checkBox_delete = (CheckBox) convertView.findViewById(R.id.checkbox_delete);
 
         // Lấy số được chọn trong Spinner và được chứa trong arrayList.
         int so = arrayList.get(position).getTable();
+        solveNumbers(so, imageView_tableNumber);
+        // Lấy nội dung từ arrayList đưa vào textView_content.
+        textView_content.setText(arrayList.get(position).getContent());
+
+        return convertView;
+    }
+
+//==================================================================================================
+
+    public void solveNumbers(int so, ImageView imageView_tableNumber) {
         if (so == 1) {
             imageView_tableNumber.setImageResource(R.drawable.mot);
         }
@@ -72,9 +85,5 @@ public class MyFoodAdapter extends ArrayAdapter<BanhCanh> {
         if (so == 11) {
             imageView_tableNumber.setImageResource(R.drawable.muoimot);
         }
-
-        textView_content.setText(arrayList.get(position).getContent());
-
-        return convertView;
     }
 }

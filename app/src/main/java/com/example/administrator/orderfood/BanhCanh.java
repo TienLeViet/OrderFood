@@ -11,8 +11,7 @@ public class BanhCanh {
     public BanhCanh() {
     }
 
-    public BanhCanh(int table, String content) {
-        this.table = table;
+    public BanhCanh(String content) {
         this.content = content;
     }
 

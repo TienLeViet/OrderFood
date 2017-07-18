@@ -11,7 +11,7 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class TypeOfMenu extends AppCompatActivity {
+public class TypeOfMenu_2 extends AppCompatActivity {
 
     Spinner spinner_table;
     Button button_foods;
@@ -25,7 +25,6 @@ public class TypeOfMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_of_menu);
-
         // Ánh xạ của activity_type_of_menu.
         addControls();
         // Events handler of activity_type_of_menu.xml.
@@ -40,12 +39,13 @@ public class TypeOfMenu extends AppCompatActivity {
         button_drinks = (Button) findViewById(R.id.button_drinks);
         button_pay    = (Button) findViewById(R.id.button_pay);
     }
-
+    // Lưu trữ dữ liệu tạm thời của số được chọn.
     int temp;
 
     public void addEvents() {
         spinnerEvent();
         foodsButtonEvent();
+        drinksButtonEvent();
     }
 
 //==================================================================================================
@@ -65,8 +65,8 @@ public class TypeOfMenu extends AppCompatActivity {
         arrayList.add(new NumberOfTables(10));
         arrayList.add(new NumberOfTables(11));
         // Đưa data source vào adapter.
-        mySpinnerAdapter = new MySpinnerAdapter(TypeOfMenu.this, R.layout.my_number, arrayList);
-        //
+        mySpinnerAdapter = new MySpinnerAdapter(TypeOfMenu_2.this, R.layout.my_number, arrayList);
+        // Hiển thị các phần tử con trong danh sách.
         mySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Đưa adapter vào spinner để lựa chọn.
         spinner_table.setAdapter(mySpinnerAdapter);
@@ -88,13 +88,23 @@ public class TypeOfMenu extends AppCompatActivity {
         button_foods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(TypeOfMenu.this, Foods.class);
-            final Bundle bundle = new Bundle();
-            // Đưa dữ liệu vào bundle.
-            bundle.putInt("tableNumber", arrayList.get(temp).getNumber());
-            // Đưa bundle vào Intent.
-            intent.putExtra("MyPackage", bundle);
-            startActivity(intent);
+                Intent intent = new Intent(TypeOfMenu_2.this, Foods_3.class);
+                // Hiểu như là một container.
+                Bundle bundle = new Bundle();
+                // Đưa dữ liệu vào bundle.
+                bundle.putInt("tableNumber", temp);
+                // Đưa bundle vào Intent.
+                intent.putExtra("MyPackage", bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void drinksButtonEvent() {
+        button_drinks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

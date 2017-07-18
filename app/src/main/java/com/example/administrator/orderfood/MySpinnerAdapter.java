@@ -34,11 +34,19 @@ public class MySpinnerAdapter extends ArrayAdapter<NumberOfTables> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Vẫn chưa rõ.
         LayoutInflater inflater = context.getLayoutInflater();
-        // Đưa lay out mình muốn hiển thị vào view.
+        // Đưa layout mình muốn hiển thị vào view.
         convertView = inflater.inflate(mySpinnerLayout, null);
         // Ánh xạ của my_number.xml.
         ImageView imageView_number = (ImageView) convertView.findViewById(R.id.imageView_number);
 
+        solveImages(position, imageView_number);
+
+        return convertView;
+    }
+
+//==================================================================================================
+
+    public void solveImages(int position, ImageView imageView_number) {
         if (mySpinnerList.get(position).getNumber() == 1) {
             // Custom spinner lại cho đẹp.
             imageView_number.setImageResource(R.drawable.mot);
@@ -83,7 +91,5 @@ public class MySpinnerAdapter extends ArrayAdapter<NumberOfTables> {
             // Custom spinner lại cho đẹp.
             imageView_number.setImageResource(R.drawable.muoimot);
         }
-
-        return convertView;
     }
 }
