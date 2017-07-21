@@ -1,4 +1,4 @@
-package com.example.administrator.orderfood;
+package com.example.administrator.orderfood.SpinnerTable;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+
+import com.example.administrator.orderfood.R;
+import com.example.administrator.orderfood.SpinnerTable.NumberOfTables;
 
 import java.util.ArrayList;
 

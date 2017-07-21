@@ -10,10 +10,17 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TabHost;
+import android.widget.Toast;
+
+import com.example.administrator.orderfood.Drinks.MyDrinksAdapter;
+import com.example.administrator.orderfood.Drinks.NuocUong;
+import com.example.administrator.orderfood.Food.BanhCanh;
+import com.example.administrator.orderfood.Food.MyFoodAdapter;
 
 import java.util.ArrayList;
 
-public class Foods_3 extends AppCompatActivity {
+public class Foods_And_Drinks_3 extends AppCompatActivity {
 
     CheckBox checkBox_long;
     CheckBox checkBox_ca;
@@ -36,14 +43,23 @@ public class Foods_3 extends AppCompatActivity {
     // Những món ăn đã order sẽ được thêm vào danh sách.
     ArrayList<BanhCanh> myBanhCanhArrayList = null;
     MyFoodAdapter myFoodAdapter = null;
+
+    ListView listView_menuDrink;
+    ArrayList<NuocUong> myNuocUongArrayList = null;
+    MyDrinksAdapter myDrinksAdapter = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foods);
+        setContentView(R.layout.activity_foods_and_drinks);
         // Ánh xạ.
         addControls();
         // Solve custom listView.
-        customListview();
+        customFoodListview();
+        customDrinkListView();
+
+        // Cấu hình tab.
+        loadTabs();
         // Event handler.
         addEvents();
     }
@@ -69,12 +85,56 @@ public class Foods_3 extends AppCompatActivity {
         imageButton_delete = (ImageButton) findViewById(R.id.imageButton_delete);
         listView_foodsWaiting = (ListView) findViewById(R.id.listView_foodsWaiting);
         button_next = (Button) findViewById(R.id.button_next);
+
+        listView_menuDrink = (ListView) findViewById(R.id.listView_drinks);
     }
 
-    public void customListview() {
+    public void customFoodListview() {
         myBanhCanhArrayList = new ArrayList<BanhCanh>();
-        myFoodAdapter = new MyFoodAdapter(Foods_3.this, R.layout.my_food, myBanhCanhArrayList);
+        myFoodAdapter = new MyFoodAdapter(Foods_And_Drinks_3.this, R.layout.my_food, myBanhCanhArrayList);
         listView_foodsWaiting.setAdapter(myFoodAdapter);
+    }
+
+    public void customDrinkListView() {
+        myNuocUongArrayList = new ArrayList<NuocUong>();
+        myNuocUongArrayList.add(new NuocUong("Coca cola"));
+        myNuocUongArrayList.add(new NuocUong("Pepsi"));
+        myNuocUongArrayList.add(new NuocUong("Aquafina"));
+        myNuocUongArrayList.add(new NuocUong("Bò húc"));
+        myNuocUongArrayList.add(new NuocUong("Sting đỏ"));
+        myNuocUongArrayList.add(new NuocUong("Sting vàng"));
+        myNuocUongArrayList.add(new NuocUong("7up"));
+        myNuocUongArrayList.add(new NuocUong("Nước mía"));
+        myNuocUongArrayList.add(new NuocUong("Trà đá"));
+        myDrinksAdapter = new MyDrinksAdapter(Foods_And_Drinks_3.this, R.layout.my_drinks, myNuocUongArrayList);
+        listView_menuDrink.setAdapter(myDrinksAdapter);
+    }
+
+    public void loadTabs() {
+        final TabHost tab = (TabHost) findViewById(android.R.id.tabhost);
+        // gọi lệnh setup.
+        tab.setup();
+        TabHost.TabSpec spec;
+        // Tạo Tab1.
+        spec = tab.newTabSpec("tab1");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("Thức ăn");
+        tab.addTab(spec);
+        // Tạo Tab2.
+        spec = tab.newTabSpec("tab2");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("Thức uống");
+        tab.addTab(spec);
+        // Thiết lập tab mặc định được chọn ban đầu là tab 0.
+        tab.setCurrentTab(0);
+        tab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                String s = "Tab tag = " + tabId + "; index = " + tab.getCurrentTab();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                
+            }
+        });
     }
 
     public void addEvents() {

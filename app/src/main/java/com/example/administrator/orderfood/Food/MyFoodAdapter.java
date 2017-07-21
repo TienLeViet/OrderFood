@@ -1,13 +1,15 @@
-package com.example.administrator.orderfood;
+package com.example.administrator.orderfood.Food;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.administrator.orderfood.Food.BanhCanh;
+import com.example.administrator.orderfood.R;
 
 import java.util.ArrayList;
 
@@ -20,14 +22,12 @@ public class MyFoodAdapter extends ArrayAdapter<BanhCanh> {
     Activity context;// Màn hình sẽ hiển thị cái giao diện my_food.xml.
     int myFoodLayout;// Giao diện my_foods.xml.
     ArrayList<BanhCanh> arrayList = null;// Món ăn đã được order.
-    int tableNumber;// Bàn đã order món ăn đó.
 
     public MyFoodAdapter(Activity context, int myFoodLayout, ArrayList<BanhCanh> arrayList) {
         super(context, myFoodLayout, arrayList);
         this.context = context;
         this.myFoodLayout = myFoodLayout;
         this.arrayList = arrayList;
-        //this.tableNumber = tableNumber;
     }
 
     @Override
@@ -38,7 +38,6 @@ public class MyFoodAdapter extends ArrayAdapter<BanhCanh> {
 
         ImageView imageView_tableNumber = (ImageView) convertView.findViewById(R.id.imageView_tableNumber);
         TextView textView_content = (TextView) convertView.findViewById(R.id.textView_content);
-        CheckBox checkBox_delete = (CheckBox) convertView.findViewById(R.id.checkbox_delete);
 
         // Lấy số được chọn trong Spinner và được chứa trong arrayList.
         int so = arrayList.get(position).getTable();

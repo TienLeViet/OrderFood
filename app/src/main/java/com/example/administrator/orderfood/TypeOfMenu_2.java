@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.administrator.orderfood.SpinnerTable.MySpinnerAdapter;
+import com.example.administrator.orderfood.SpinnerTable.NumberOfTables;
+
 import java.util.ArrayList;
 
 public class TypeOfMenu_2 extends AppCompatActivity {
@@ -88,7 +91,7 @@ public class TypeOfMenu_2 extends AppCompatActivity {
         button_foods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TypeOfMenu_2.this, Foods_3.class);
+                Intent intent = new Intent(TypeOfMenu_2.this, Foods_And_Drinks_3.class);
                 // Hiểu như là một container.
                 Bundle bundle = new Bundle();
                 // Đưa dữ liệu vào bundle.
