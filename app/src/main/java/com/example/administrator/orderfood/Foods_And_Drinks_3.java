@@ -13,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.example.administrator.orderfood.Database.OrderFoodDatabase;
+import com.example.administrator.orderfood.Database.Task;
 import com.example.administrator.orderfood.Drinks.MyDrinksAdapter;
 import com.example.administrator.orderfood.Drinks.NuocUong;
 import com.example.administrator.orderfood.Food.BanhCanh;
@@ -47,6 +49,9 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
     ListView listView_menuDrink;
     ArrayList<NuocUong> myNuocUongArrayList = null;
     MyDrinksAdapter myDrinksAdapter = null;
+
+    OrderFoodDatabase db = new OrderFoodDatabase(this);
+    StringBuilder sb = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,7 +226,10 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ArrayList<Task> tasks = db.getTasks("Foods");
+                for (Task t : tasks) {
+                    sb.append(t.getId() + "|" + t.getNumber() + "|" + t.getContent());
+                }
             }
         });
     }
@@ -229,12 +237,18 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
 //==================================================================================================
 
     public void displayListView() {
-        BanhCanh banhCanh = new BanhCanh();
-        banhCanh.setContent(solve_CheckBoxs_And_RadioButtons());
+        BanhCanh banhCanh = new BanhCanh(solve_TypeOfMenu_Intent(), solve_CheckBoxs_And_RadioButtons());
+        //banhCanh.setContent(solve_CheckBoxs_And_RadioButtons());
         myBanhCanhArrayList.add(banhCanh);
         myFoodAdapter.notifyDataSetChanged();
         // If the CheckBox is checked then setting is false.
         editAsFirst();
+
+        Task task = new Task(1, banhCanh.getTable(), banhCanh.getContent());
+        long insertId = db.insertTask(task);
+        if (insertId > 0) {
+            sb.append("Row insertId! Insert id: " + insertId + "\n");
+        }
     }
 
     public void deleteListView() {

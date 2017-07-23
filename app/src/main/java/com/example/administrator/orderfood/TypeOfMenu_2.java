@@ -18,7 +18,6 @@ public class TypeOfMenu_2 extends AppCompatActivity {
 
     Spinner spinner_table;
     Button button_foods;
-    Button button_drinks;
     Button button_pay;
     ArrayList<NumberOfTables> arrayList = null;
     MySpinnerAdapter mySpinnerAdapter = null;
@@ -39,7 +38,6 @@ public class TypeOfMenu_2 extends AppCompatActivity {
     public void addControls() {
         spinner_table = (Spinner) findViewById(R.id.spinner_table);
         button_foods  = (Button) findViewById(R.id.button_foods);
-        button_drinks = (Button) findViewById(R.id.button_drinks);
         button_pay    = (Button) findViewById(R.id.button_pay);
     }
     // Lưu trữ dữ liệu tạm thời của số được chọn.
@@ -48,7 +46,7 @@ public class TypeOfMenu_2 extends AppCompatActivity {
     public void addEvents() {
         spinnerEvent();
         foodsButtonEvent();
-        drinksButtonEvent();
+        payButtonEvent();
     }
 
 //==================================================================================================
@@ -103,8 +101,8 @@ public class TypeOfMenu_2 extends AppCompatActivity {
         });
     }
 
-    public void drinksButtonEvent() {
-        button_drinks.setOnClickListener(new View.OnClickListener() {
+    public void payButtonEvent() {
+        button_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
