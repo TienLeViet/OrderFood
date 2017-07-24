@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -115,8 +116,10 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         listView_menuDrink.setAdapter(myDrinksAdapter);
     }
 
+    TabHost tab;
+
     public void loadTabs() {
-        final TabHost tab = (TabHost) findViewById(android.R.id.tabhost);
+        tab = (TabHost) findViewById(android.R.id.tabhost);
         // gọi lệnh setup.
         tab.setup();
         TabHost.TabSpec spec;
@@ -137,7 +140,6 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
             public void onTabChanged(String tabId) {
                 String s = "Tab tag = " + tabId + "; index = " + tab.getCurrentTab();
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-                
             }
         });
     }
@@ -208,7 +210,18 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                displayListView();
+            BanhCanh banhCanh = new BanhCanh(solve_TypeOfMenu_Intent(), solve_CheckBoxs_And_RadioButtons());
+            // Display on listview.
+            myBanhCanhArrayList.add(banhCanh);
+            myFoodAdapter.notifyDataSetChanged();
+            // If the CheckBox is checked then setting is false.
+            editAsFirst();
+
+            Task task = new Task(1, banhCanh.getTable(), banhCanh.getContent());
+            long insertID = db.insertTask(task);
+            if (insertID > 0) {
+                Toast.makeText(Foods_And_Drinks_3.this, "Inserted", Toast.LENGTH_LONG).show();
+            }
             }
         });
     }
@@ -217,7 +230,25 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         imageButton_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteListView();
+                // Đi ngược danh sách, kiểm tra phần tử nào checked thì xóa đúng vị trí đó ra khỏi myBanhCanhArrayList.
+                for (int i = listView_foodsWaiting.getChildCount() - 1; i >= 0; i--) {
+                    // Lấy ra dòng thứ i trong ListView.
+                    // Dòng thứ i sẽ có 3 phần tử: ImageView, TextView, CheckBox.
+                    v = listView_foodsWaiting.getChildAt(i);
+                    // Lấy CheckBox ra kiểm tra.
+                    CheckBox checkBox_delete = (CheckBox) v.findViewById(R.id.checkbox_delete);
+                    if (checkBox_delete.isChecked()) {
+                        Task task = new Task(1, myBanhCanhArrayList.get(i).getTable(), myBanhCanhArrayList.get(i).getContent());
+                        int deleteCount = db.deleteTask(???);
+                        if (deleteCount == 1) {
+                            Toast.makeText(Foods_And_Drinks_3.this, "Deleted", Toast.LENGTH_LONG).show();
+                        }
+                        // Xóa phần tử thứ i ra khỏi danh sách.
+                        myBanhCanhArrayList.remove(i);
+                    }
+                }
+                // Update giao diện.
+                myFoodAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -226,46 +257,15 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Task> tasks = db.getTasks("Foods");
-                for (Task t : tasks) {
-                    sb.append(t.getId() + "|" + t.getNumber() + "|" + t.getContent());
+                // Đưa dữ liệu trong listView_foodsWaiting vào database.
+                for (int i = 0; i < listView_foodsWaiting.getChildCount(); i++) {
+                    v = listView_foodsWaiting.getChildAt(i);
+
+                    ImageView imageView = (ImageView) v.findViewById(R.id.imageView_tableNumber);
+                    
                 }
             }
         });
-    }
-
-//==================================================================================================
-
-    public void displayListView() {
-        BanhCanh banhCanh = new BanhCanh(solve_TypeOfMenu_Intent(), solve_CheckBoxs_And_RadioButtons());
-        //banhCanh.setContent(solve_CheckBoxs_And_RadioButtons());
-        myBanhCanhArrayList.add(banhCanh);
-        myFoodAdapter.notifyDataSetChanged();
-        // If the CheckBox is checked then setting is false.
-        editAsFirst();
-
-        Task task = new Task(1, banhCanh.getTable(), banhCanh.getContent());
-        long insertId = db.insertTask(task);
-        if (insertId > 0) {
-            sb.append("Row insertId! Insert id: " + insertId + "\n");
-        }
-    }
-
-    public void deleteListView() {
-        // Đi ngược danh sách, kiểm tra phần tử nào checked thì xóa đúng vị trí đó ra khỏi myBanhCanhArrayList.
-        for (int i = listView_foodsWaiting.getChildCount() - 1; i >= 0; i--) {
-            // Lấy ra dòng thứ i trong ListView.
-            // Dòng thứ i sẽ có 3 phần tử: ImageView, TextView, CheckBox.
-            View v = listView_foodsWaiting.getChildAt(i);
-            // Lấy CheckBox ra kiểm tra.
-            CheckBox checkBox_delete = (CheckBox) v.findViewById(R.id.checkbox_delete);
-            if (checkBox_delete.isChecked()) {
-                // Xóa phần tử thứ i ra khỏi danh sách.
-                myBanhCanhArrayList.remove(i);
-            }
-        }
-        // Update giao diện.
-        myFoodAdapter.notifyDataSetChanged();
     }
 
 //==================================================================================================

@@ -20,8 +20,8 @@
     <string name="KhongGiaVi">Không gia vị</string>
     <string name="GoiVe">Gói về</string>
     <string name="normal">Thường</string>
-    <string name="small">Ít bột</string>
+    <string name="small">Nhỏ</string>
     <string name="special">Đặc biệt</string>
     <string name="add">Thêm</string>
-    <string name="next">Tiếp theo</string>
+    <string name="complete">Hoàn thành</string>
 </resources>

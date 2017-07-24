@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 
 public class OrderFoodDatabase {
-    public static final String DB_NAME = "OrderFood";
+    public static final String DB_NAME = "OrderFood.db";
     public static final int DB_VERSION = 1;
 
     // Tab thức ăn và nước uống.
