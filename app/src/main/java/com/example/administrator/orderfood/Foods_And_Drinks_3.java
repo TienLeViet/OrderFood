@@ -208,6 +208,10 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
 
     public void eventAddButton() {
         button_add.setOnClickListener(new View.OnClickListener() {
+
+// Làm sao để xử lý, khi đang đứng ở tab thức ăn thì nhận data của tab thức ăn
+// và ở tab thức uống thì nhận dữ liệu của tab thức uống.
+
             @Override
             public void onClick(View v) {
             BanhCanh banhCanh = new BanhCanh(solve_TypeOfMenu_Intent(), solve_CheckBoxs_And_RadioButtons());
@@ -216,12 +220,6 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
             myFoodAdapter.notifyDataSetChanged();
             // If the CheckBox is checked then setting is false.
             editAsFirst();
-
-            Task task = new Task(1, banhCanh.getTable(), banhCanh.getContent());
-            long insertID = db.insertTask(task);
-            if (insertID > 0) {
-                Toast.makeText(Foods_And_Drinks_3.this, "Inserted", Toast.LENGTH_LONG).show();
-            }
             }
         });
     }
@@ -238,11 +236,6 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
                     // Lấy CheckBox ra kiểm tra.
                     CheckBox checkBox_delete = (CheckBox) v.findViewById(R.id.checkbox_delete);
                     if (checkBox_delete.isChecked()) {
-                        Task task = new Task(1, myBanhCanhArrayList.get(i).getTable(), myBanhCanhArrayList.get(i).getContent());
-                        int deleteCount = db.deleteTask(???);
-                        if (deleteCount == 1) {
-                            Toast.makeText(Foods_And_Drinks_3.this, "Deleted", Toast.LENGTH_LONG).show();
-                        }
                         // Xóa phần tử thứ i ra khỏi danh sách.
                         myBanhCanhArrayList.remove(i);
                     }
@@ -259,9 +252,13 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
             public void onClick(View v) {
                 // Đưa dữ liệu trong listView_foodsWaiting vào database.
                 for (int i = 0; i < listView_foodsWaiting.getChildCount(); i++) {
-                    v = listView_foodsWaiting.getChildAt(i);
+                    //v = listView_foodsWaiting.getChildAt(i);
 
-                    ImageView imageView = (ImageView) v.findViewById(R.id.imageView_tableNumber);
+                    Task task = new Task(1, myBanhCanhArrayList.get(i).getTable(), myBanhCanhArrayList.get(i).getContent());
+                    long insertID = db.insertTask(task);
+                    if (insertID > 0) {
+                        Toast.makeText(Foods_And_Drinks_3.this, "Inserted", Toast.LENGTH_LONG).show();
+                    }
                     
                 }
             }
