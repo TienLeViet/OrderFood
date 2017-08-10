@@ -1,4 +1,4 @@
-package com.example.administrator.orderfood.Food;
+package com.example.administrator.orderfood.Foods.CustomBanhCanh;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.administrator.orderfood.Food.BanhCanh;
 import com.example.administrator.orderfood.R;
 
 import java.util.ArrayList;
@@ -50,39 +49,39 @@ public class MyFoodAdapter extends ArrayAdapter<BanhCanh> {
 
 //==================================================================================================
 
-    public void solveNumbers(int so, ImageView imageView_tableNumber) {
+    public void solveNumbers(int so, ImageView imageView) {
         if (so == 1) {
-            imageView_tableNumber.setImageResource(R.drawable.mot);
+            imageView.setImageResource(R.drawable.mot);
         }
         if (so == 2) {
-            imageView_tableNumber.setImageResource(R.drawable.hai);
+            imageView.setImageResource(R.drawable.hai);
         }
         if (so == 3) {
-            imageView_tableNumber.setImageResource(R.drawable.ba);
+            imageView.setImageResource(R.drawable.ba);
         }
         if (so == 4) {
-            imageView_tableNumber.setImageResource(R.drawable.bon);
+            imageView.setImageResource(R.drawable.bon);
         }
         if (so == 5) {
-            imageView_tableNumber.setImageResource(R.drawable.nam);
+            imageView.setImageResource(R.drawable.nam);
         }
         if (so == 6) {
-            imageView_tableNumber.setImageResource(R.drawable.sau);
+            imageView.setImageResource(R.drawable.sau);
         }
         if (so == 7) {
-            imageView_tableNumber.setImageResource(R.drawable.bay);
+            imageView.setImageResource(R.drawable.bay);
         }
         if (so == 8) {
-            imageView_tableNumber.setImageResource(R.drawable.tam);
+            imageView.setImageResource(R.drawable.tam);
         }
         if (so == 9) {
-            imageView_tableNumber.setImageResource(R.drawable.chin);
+            imageView.setImageResource(R.drawable.chin);
         }
         if (so == 10) {
-            imageView_tableNumber.setImageResource(R.drawable.muoi);
+            imageView.setImageResource(R.drawable.muoi);
         }
         if (so == 11) {
-            imageView_tableNumber.setImageResource(R.drawable.muoimot);
+            imageView.setImageResource(R.drawable.muoimot);
         }
     }
 }

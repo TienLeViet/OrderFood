@@ -1,16 +1,16 @@
-package com.example.administrator.orderfood.SpinnerTable;
+package com.example.administrator.orderfood.Menu.SpinnerTable;
 
 /**
  * Created by Administrator on 05/07/2017.
  */
 
-public class NumberOfTables {
+public class Number {
     private int number;
 
-    public NumberOfTables() {
+    public Number() {
     }
 
-    public NumberOfTables(int number) {
+    public Number(int number) {
         this.number = number;
     }
 
@@ -24,6 +24,6 @@ public class NumberOfTables {
 
     @Override
     public String toString() {
-        return this.number + "";
+        return number + "";
     }
 }

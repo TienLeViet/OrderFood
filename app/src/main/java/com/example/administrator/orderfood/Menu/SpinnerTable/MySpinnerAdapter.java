@@ -1,4 +1,4 @@
-package com.example.administrator.orderfood.SpinnerTable;
+package com.example.administrator.orderfood.Menu.SpinnerTable;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.example.administrator.orderfood.R;
-import com.example.administrator.orderfood.SpinnerTable.NumberOfTables;
 
 import java.util.ArrayList;
 
@@ -16,16 +15,16 @@ import java.util.ArrayList;
  * Created by Administrator on 05/07/2017.
  */
 
-public class MySpinnerAdapter extends ArrayAdapter<NumberOfTables> {
+public class MySpinnerAdapter extends ArrayAdapter<Number> {
 
-    Activity context;// View uses this MySpinnerAdapter.
+    Activity activity;// View uses this MySpinnerAdapter.
     int mySpinnerLayout;// The layout (my_number.xml) that you want to use, and it is design by yourself.
-    ArrayList<NumberOfTables> mySpinnerList;// Number image.
+    ArrayList<Number> mySpinnerList;// Number image.
 
     // This constructor is custom the spinner in NumberOfTable.java.
-    public MySpinnerAdapter(Activity context, int mySpinnerLayout, ArrayList<NumberOfTables> mySpinnerList) {
-        super(context, mySpinnerLayout, mySpinnerList);
-        this.context = context;
+    public MySpinnerAdapter(Activity activity, int mySpinnerLayout, ArrayList<Number> mySpinnerList) {
+        super(activity, mySpinnerLayout, mySpinnerList);
+        this.activity = activity;
         this.mySpinnerLayout = mySpinnerLayout;
         this.mySpinnerList = mySpinnerList;
     }
@@ -36,7 +35,7 @@ public class MySpinnerAdapter extends ArrayAdapter<NumberOfTables> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Vẫn chưa rõ.
-        LayoutInflater inflater = context.getLayoutInflater();
+        LayoutInflater inflater = activity.getLayoutInflater();
         // Đưa layout mình muốn hiển thị vào view.
         convertView = inflater.inflate(mySpinnerLayout, null);
         // Ánh xạ của my_number.xml.

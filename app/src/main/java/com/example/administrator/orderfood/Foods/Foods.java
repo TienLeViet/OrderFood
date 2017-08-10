@@ -1,4 +1,4 @@
-package com.example.administrator.orderfood;
+package com.example.administrator.orderfood.Foods;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,23 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.example.administrator.orderfood.Database.OrderFoodDatabase;
 import com.example.administrator.orderfood.Database.Task;
-import com.example.administrator.orderfood.Drinks.MyDrinksAdapter;
-import com.example.administrator.orderfood.Drinks.NuocUong;
-import com.example.administrator.orderfood.Food.BanhCanh;
-import com.example.administrator.orderfood.Food.MyFoodAdapter;
+import com.example.administrator.orderfood.Foods.CustomBanhCanh.BanhCanh;
+import com.example.administrator.orderfood.Foods.CustomBanhCanh.MyFoodAdapter;
+import com.example.administrator.orderfood.R;
 
 import java.util.ArrayList;
 
-public class Foods_And_Drinks_3 extends AppCompatActivity {
+public class Foods extends AppCompatActivity {
 
     CheckBox checkBox_long;
     CheckBox checkBox_ca;
@@ -43,29 +40,21 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
     ImageButton imageButton_delete;
     ListView listView_foodsWaiting;
     Button button_next;
-    // Những món ăn đã order sẽ được thêm vào danh sách.
+
     ArrayList<BanhCanh> myBanhCanhArrayList = null;
     MyFoodAdapter myFoodAdapter = null;
 
-    ListView listView_menuDrink;
-    ArrayList<NuocUong> myNuocUongArrayList = null;
-    MyDrinksAdapter myDrinksAdapter = null;
-
-    OrderFoodDatabase db = new OrderFoodDatabase(this);
-    StringBuilder sb = new StringBuilder();
+    OrderFoodDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foods_and_drinks);
+        setContentView(R.layout.activity_foods);
         // Ánh xạ.
         addControls();
         // Solve custom listView.
-        customFoodListview();
-        customDrinkListView();
+        customWaitingListview();
 
-        // Cấu hình tab.
-        loadTabs();
         // Event handler.
         addEvents();
     }
@@ -89,79 +78,37 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
 
         button_add = (Button) findViewById(R.id.button_add);
         imageButton_delete = (ImageButton) findViewById(R.id.imageButton_delete);
-        listView_foodsWaiting = (ListView) findViewById(R.id.listView_foodsWaiting);
         button_next = (Button) findViewById(R.id.button_next);
 
-        listView_menuDrink = (ListView) findViewById(R.id.listView_drinks);
+        db = new OrderFoodDatabase(this);
     }
 
-    public void customFoodListview() {
+    public void customWaitingListview() {
+        listView_foodsWaiting = (ListView) findViewById(R.id.listView_foodsWaiting);
         myBanhCanhArrayList = new ArrayList<BanhCanh>();
-        myFoodAdapter = new MyFoodAdapter(Foods_And_Drinks_3.this, R.layout.my_food, myBanhCanhArrayList);
+        myFoodAdapter = new MyFoodAdapter(Foods.this, R.layout.my_food, myBanhCanhArrayList);
         listView_foodsWaiting.setAdapter(myFoodAdapter);
     }
 
-    public void customDrinkListView() {
-        myNuocUongArrayList = new ArrayList<NuocUong>();
-        myNuocUongArrayList.add(new NuocUong("Coca cola"));
-        myNuocUongArrayList.add(new NuocUong("Pepsi"));
-        myNuocUongArrayList.add(new NuocUong("Aquafina"));
-        myNuocUongArrayList.add(new NuocUong("Bò húc"));
-        myNuocUongArrayList.add(new NuocUong("Sting đỏ"));
-        myNuocUongArrayList.add(new NuocUong("Sting vàng"));
-        myNuocUongArrayList.add(new NuocUong("7up"));
-        myNuocUongArrayList.add(new NuocUong("Nước mía"));
-        myNuocUongArrayList.add(new NuocUong("Trà đá"));
-        myDrinksAdapter = new MyDrinksAdapter(Foods_And_Drinks_3.this, R.layout.my_drinks, myNuocUongArrayList);
-        listView_menuDrink.setAdapter(myDrinksAdapter);
-    }
-
-    TabHost tab;
-
-    public void loadTabs() {
-        tab = (TabHost) findViewById(android.R.id.tabhost);
-        // gọi lệnh setup.
-        tab.setup();
-        TabHost.TabSpec spec;
-        // Tạo Tab1.
-        spec = tab.newTabSpec("tab1");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Thức ăn");
-        tab.addTab(spec);
-        // Tạo Tab2.
-        spec = tab.newTabSpec("tab2");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("Thức uống");
-        tab.addTab(spec);
-        // Thiết lập tab mặc định được chọn ban đầu là tab 0.
-        tab.setCurrentTab(0);
-        tab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                String s = "Tab tag = " + tabId + "; index = " + tab.getCurrentTab();
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
     public void addEvents() {
+
         solve_TypeOfMenu_Intent();
         solve_CheckBoxs_And_RadioButtons();
         eventAddButton();
         eventDeleteButton();
-        eventNextButton();
+        eventCompleteButton();
 
     }
 
 //==================================================================================================
 
     public int solve_TypeOfMenu_Intent() {
-        // Nhận Intent từ TypeOfMenu.java.
+        // Nhận Intent từ Menu.java.
         Intent myIntent = getIntent();
         // Nhận bundle dựa vào tên.
-        Bundle myBundle = myIntent.getBundleExtra("MyPackage");
+        Bundle myBundle = myIntent.getBundleExtra("MyPackage1");
         // Lấy nội dung trong bundle.
-        int table = myBundle.getInt("tableNumber");
+        int table = myBundle.getInt("tableNumber1");
         return table;
     }
 
@@ -208,18 +155,15 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
 
     public void eventAddButton() {
         button_add.setOnClickListener(new View.OnClickListener() {
-
-// Làm sao để xử lý, khi đang đứng ở tab thức ăn thì nhận data của tab thức ăn
-// và ở tab thức uống thì nhận dữ liệu của tab thức uống.
-
             @Override
             public void onClick(View v) {
-            BanhCanh banhCanh = new BanhCanh(solve_TypeOfMenu_Intent(), solve_CheckBoxs_And_RadioButtons());
-            // Display on listview.
-            myBanhCanhArrayList.add(banhCanh);
-            myFoodAdapter.notifyDataSetChanged();
-            // If the CheckBox is checked then setting is false.
-            editAsFirst();
+                BanhCanh banhCanh = new BanhCanh(solve_TypeOfMenu_Intent(),
+                        solve_CheckBoxs_And_RadioButtons());
+                // Display on listview.
+                myBanhCanhArrayList.add(banhCanh);
+                myFoodAdapter.notifyDataSetChanged();
+                // If the CheckBox is checked then setting is false.
+                editFoodsAsFirst();
             }
         });
     }
@@ -228,7 +172,8 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         imageButton_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Đi ngược danh sách, kiểm tra phần tử nào checked thì xóa đúng vị trí đó ra khỏi myBanhCanhArrayList.
+                // Đi ngược danh sách, kiểm tra phần tử nào checked
+                // thì xóa đúng vị trí đó ra khỏi myBanhCanhArrayList.
                 for (int i = listView_foodsWaiting.getChildCount() - 1; i >= 0; i--) {
                     // Lấy ra dòng thứ i trong ListView.
                     // Dòng thứ i sẽ có 3 phần tử: ImageView, TextView, CheckBox.
@@ -246,20 +191,18 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
         });
     }
 
-    public void eventNextButton() {
+    public void eventCompleteButton() {
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Đưa dữ liệu trong listView_foodsWaiting vào database.
                 for (int i = 0; i < listView_foodsWaiting.getChildCount(); i++) {
-                    //v = listView_foodsWaiting.getChildAt(i);
-
-                    Task task = new Task(1, myBanhCanhArrayList.get(i).getTable(), myBanhCanhArrayList.get(i).getContent());
+                    Task task = new Task(1, myBanhCanhArrayList.get(i).getTable(),
+                            myBanhCanhArrayList.get(i).getContent());
                     long insertID = db.insertTask(task);
                     if (insertID > 0) {
-                        Toast.makeText(Foods_And_Drinks_3.this, "Inserted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Foods.this, "Inserted", Toast.LENGTH_LONG).show();
                     }
-                    
                 }
             }
         });
@@ -267,7 +210,7 @@ public class Foods_And_Drinks_3 extends AppCompatActivity {
 
 //==================================================================================================
 
-    public void editAsFirst() {
+    public void editFoodsAsFirst() {
         if (checkBox_long.isChecked()) {
             checkBox_long.setChecked(false);
         }

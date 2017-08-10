@@ -6,8 +6,7 @@
     <string name="password">Nhập mật khẩu</string>
     <string name="restaurantName">Quán Tơ</string>
     <string name="table">Bàn số</string>
-    <string name="foods">Thức ăn</string>
-    <string name="drinks">Thức uống</string>
+    <string name="foods">Món ăn</string>
     <string name="pay">Thanh toán</string>
     <string name="type">Thành phần</string>
     <string name="listWaiting">Danh sách chờ</string>

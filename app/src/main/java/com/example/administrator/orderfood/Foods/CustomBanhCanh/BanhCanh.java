@@ -1,4 +1,4 @@
-package com.example.administrator.orderfood.Food;
+package com.example.administrator.orderfood.Foods.CustomBanhCanh;
 
 /**
  * Created by Administrator on 06/07/2017.
@@ -10,10 +10,6 @@ public class BanhCanh {
     private String content;
 
     public BanhCanh() {
-    }
-
-    public BanhCanh(String content) {
-        this.content = content;
     }
 
     public BanhCanh(int table, String content) {

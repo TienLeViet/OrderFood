@@ -3,9 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listView_drinks"
+    <TextView
+        android:id="@+id/textView_itemDisplay"
         android:layout_width="match_parent"
-        android:layout_height="200dp"></ListView>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

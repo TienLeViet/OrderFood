@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.administrator.orderfood.Food.BanhCanh;
-
 import java.util.ArrayList;
 
 /**
@@ -16,6 +14,7 @@ import java.util.ArrayList;
  */
 
 public class OrderFoodDatabase {
+
     public static final String DB_NAME = "OrderFood.db";
     public static final int DB_VERSION = 1;
 
@@ -64,7 +63,8 @@ public class OrderFoodDatabase {
 
 
     private class DBHelper extends SQLiteOpenHelper {
-        public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,
+                        int version) {
             super(context, name, factory, version);
         }
 

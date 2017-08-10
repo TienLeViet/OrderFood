@@ -1,4 +1,4 @@
-package com.example.administrator.orderfood;
+package com.example.administrator.orderfood.Login;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity_1 extends AppCompatActivity {
+import com.example.administrator.orderfood.Chef.Chef;
+import com.example.administrator.orderfood.R;
+import com.example.administrator.orderfood.Menu.Menu;
+
+public class MainActivity extends AppCompatActivity {
 
     EditText editText_username;
     EditText editText_password;
@@ -42,17 +46,26 @@ public class MainActivity_1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Kiểm tra tài khoản và mật khẩu.
-                if (editText_username.getText().toString().equals("admin")
-                        && editText_password.getText().toString().equals("admin")) {
-                    // If true then opens the activity_type_of_menu.xml interface.
-                    Intent intent = new Intent(MainActivity_1.this, TypeOfMenu_2.class);
+                if (editText_username.getText().toString().equals("staff")
+                        && editText_password.getText().toString().equals("staff")) {
+                    // If true then opens the activity_menu.xmlce.
+                    Intent intent = new Intent(MainActivity.this, Menu.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(MainActivity_1.this, "Tài khoản hoặc mật khẩu không đúng!", Toast.LENGTH_LONG).show();
-                    // If false then decreases the countNumber variable, and if it equals 0 then hide the button.
-                    countNumber--;
-                    if (countNumber == 0) {
-                        button_login.setEnabled(false);
+                    if (editText_username.getText().toString().equals("chef")
+                            && editText_password.getText().toString().equals("chef")) {
+                        // If true then opens the activity_chefs.xml interface.
+                        Intent intent = new Intent(MainActivity.this, Chef.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Tài khoản hoặc mật khẩu không đúng!",
+                                Toast.LENGTH_LONG).show();
+                        // If false then decreases the countNumber variable,
+                        // and if it equals 0 then hide the button.
+                        countNumber--;
+                        if (countNumber == 0) {
+                            button_login.setEnabled(false);
+                        }
                     }
                 }
             }
